@@ -6,7 +6,12 @@ More information can be found here: https://dolby.io/developers/media-processing
 
 # Prerequisites
 
-Get an API key by signing up at https://dolby.io/, and save the key as an environment variable named `API_KEY` either on your system or in a `.env` file
+Get an API key by signing up at https://dolby.io/
+
+Save the following as environment variables either on your system or in a `.env` file
+
+- `API_KEY`: Dolby.io API key
+- `AUDIO_FILE`: Name of file in current directory to be analyzed
 
 Create a Python virtual environment
 
@@ -22,13 +27,13 @@ Install necessary Python packages
 
 # Analyze audio
 
-Use the dolby.io Media Processing APIs to analyze the `HBOIntoTheStorm.wav` signal in this directory, run the following command
+Use the dolby.io Media Processing APIs to analyze the `AUDIO_FILE` signal, run the following command
 
         python analyze.py
 
 # Analyze and enhance degraded audio (TODO)
 
-First add random noise to the `HBOIntoTheStorm.wav` file by running the following command
+First add random noise to the `AUDIO_FILE` signal by running the following command
 
         python add_noise.py
 

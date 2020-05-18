@@ -1,19 +1,19 @@
 import os
 import string
 import random
-from typing import Dict
+from typing import Tuple
 from dotenv import load_dotenv
 
-def get_env_vars() -> Dict[str, str]:
+def get_env_vars() -> Tuple[str, str]:
     """
     Function to get environment variables from .env file
     """
     load_dotenv()
     
-    env_vars = {}
-    env_vars['api_key'] = os.getenv('API_KEY')
-
-    return env_vars
+    return (
+        os.getenv('API_KEY'),
+        os.getenv('AUDIO_FILE')
+    )
     
 def generate_media_location(name: str) -> str:
     """

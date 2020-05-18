@@ -14,3 +14,10 @@ venv.bak/
 
 # vscode
 .vscode/
+
+# audio files
+*.wav
+*.ac4
+*.ec3
+*.ts
+*.trp

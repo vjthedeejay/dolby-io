@@ -6,18 +6,14 @@ import util
 def main():
     
     # define any environment variables
-    env_vars = util.get_env_vars()
-    API_KEY = env_vars.get('api_key')
+    API_KEY, AUDIO_FILE = util.get_env_vars()
 
     # define endpoints to post to
     media_input_url = 'https://api.dolby.com/media/input'
     analyze_url = 'https://api.dolby.com/media/analyze'
 
-    # define file to upload
-    my_file = 'HBOIntoTheStorm.wav'
-
     # define media location to upload file to
-    media_location = util.generate_media_location(my_file)
+    media_location = util.generate_media_location(AUDIO_FILE)
 
     # define header that will always be used
     headers = {
@@ -44,7 +40,7 @@ def main():
     try:
         response = requests.put(
             response.json().get('url'),
-            data=open(my_file, 'rb'),
+            data=open(AUDIO_FILE, 'rb'),
         )
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
