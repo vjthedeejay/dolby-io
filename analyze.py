@@ -2,6 +2,7 @@ import os
 import requests
 import time
 import util
+from pprint import pprint
 
 def main():
     
@@ -59,36 +60,26 @@ def main():
     except requests.exceptions.RequestException as e:
         raise SystemExit(e)
 
-    # get analysis
+    # get and print analysis
+    # retry after 5 seconds if analysis is not yet complete
     job_id_url = f"{analyze_url}?job_id={response.json().get('job_id')}"
 
-    try:
-        response = requests.get(
-            job_id_url,
-            headers=headers,
-        )
-    except requests.exceptions.RequestException as e:
-        raise SystemExit(e)
+    while True:
+        try:
+            response = requests.get(
+                job_id_url,
+                headers=headers,
+            )
+        except requests.exceptions.RequestException as e:
+            raise SystemExit(e)
 
-
-    while 1:
         if response.json().get('status') == 'Success':
-            # print analysis
-            print(response.json().get('result'))
+            util.print_result(
+                response.json().get('result')
+            )
             break
         else:
-            # wait for 5 seconds
             time.sleep(5)
-
-            # try getting analysis again
-            try:
-                response = requests.get(
-                    job_id_url,
-                    headers=headers,
-                )
-            except requests.exceptions.RequestException as e:
-                raise SystemExit(e)
-
 
 if __name__ == "__main__":
     main()
